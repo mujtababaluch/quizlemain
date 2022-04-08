@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Quiz Score {% endblock %}
+{% block content %} 
+
+<h1>Play: <a href="{% url 'play_quiz' scores.0.quiz.id %}">{{scores.0.quiz.name}}</a></h1>
+<h1>Scores</h1>
+{% for score in scores %}
+<ul>
+    <li>
+    Attempt {{ forloop.counter }}: {{score.score}} / {{questions}} <br>
+    </li>
+</ul>
+
+{% endfor %}
+
+
+ {% endblock %}

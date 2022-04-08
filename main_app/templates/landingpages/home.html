@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %} 
+
+
+<h1>Welcome to Quizle</h1>
+
+{% for following in home_following %}
+    Topic: {{following.topic.name}} <br>
+    {% if following.quizes %}
+        {% for quiz in following.quizes %}
+            <a href="{%url 'play_quiz' quiz.id%}"> Quiz: {{quiz.name}}</a>
+            <br>
+        {% endfor %}
+    {% else %}
+        No Quizes Available
+    {% endif %}
+    <br>
+    <br>
+{% endfor %}
+
+{% endblock %}

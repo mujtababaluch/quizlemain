@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %} {{thisuser.username}} {% endblock %}
+{% block content %}
+
+
+<div class="card">
+    <div class="card-content row">
+        <div class="col m10">
+            <span class="card-title">Username: {{thisuser.username}}</span>
+            <p>First Name: {{thisuser.first_name}}</p>
+            <p>Last Name: {{thisuser.last_name}}</p>
+            <hr>
+            <p>{{thisuser.first_name}} Played Quizes:
+                {% for quiz in quizes %}
+            <ul>
+                <li><a href="{% url 'view_score' quiz.id thisuser.id %}">{{quiz.name}}</a></li>
+            </ul>
+            {% endfor %}
+            </p>
+            <hr>
+            <p>Quizes {{thisuser.first_name}} Has Made:
+                {% for createdquiz in createdquizes %}
+            <ul>
+                <li>
+                    <a href="{% url 'play_quiz' createdquiz.id %}">Play: {{createdquiz.name}}</a>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+        <div class="col m2">
+            <img class="image" src="{{thisuser.userextras.profilePic.url}}" alt="profilePic" style="height: 150px"
+                width="250px">
+        </div>
+    </div>
+    <div class="card-action">
+        {% if thisuser.id == user.id %}
+        <a href="{% url 'profile_edit' %}">Edit Profile</a>
+        {% endif %}
+    </div>
+</div>
+<br>
+{% endblock %}
